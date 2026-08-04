@@ -1,0 +1,112 @@
+import { useEffect, useState } from 'react';
+import { NavLink, Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext.jsx';
+import { api } from '../lib/api.js';
+import { fmtTime } from '../lib/format.js';
+
+export default function Navbar() {
+  const { session, profile, signOut, setAuthOpen } = useAuth();
+  const [open, setOpen] = useState(false);
+  const [menu, setMenu] = useState(false);
+  const [notes, setNotes] = useState([]);
+
+  useEffect(() => {
+    if (!session) { setNotes([]); return; }
+    let live = true;
+    const load = () => api.myNotifications().then((n) => live && setNotes(n)).catch(() => {});
+    load();
+    const t = setInterval(load, 45000);
+    return () => { live = false; clearInterval(t); };
+  }, [session]);
+
+  const links = [
+    ['/', 'Home'],
+    ['/rooms', 'Accommodations'],
+    ['/my-bookings', 'My Bookings'],
+    ['/resort-customer', 'Guest Hub'],
+  ];
+
+  return (
+    <>
+      <div className="tagbar">
+        <div className="container">
+          <span>☀️ Bolinao 29°C · Sunset 6:24 PM · High Tide 4:15 PM · Front desk 24/7</span>
+          <span>📟 SMS pings on every reservation · +63 900 555 0123</span>
+        </div>
+      </div>
+
+      <header className="navbar">
+        <div className="container">
+          <Link to="/" className="logo">
+            <span className="logo-mark" style={{ background: 'linear-gradient(135deg, rgba(56,189,248,.25), rgba(14,165,233,.4))', border: '1px solid rgba(255,255,255,.35)' }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="7" r="3" fill="#F59E0B" />
+                <path d="M2 17c3-3 6-3 9 0s6 3 9 0" stroke="#7DD3FC" strokeWidth="2" strokeLinecap="round" />
+                <path d="M2 12c3-2 6-2 9 0s6 2 9 0" stroke="#38BDF8" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+            </span>
+            <span style={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}>
+              <span className="serif" style={{ fontSize: '1.25rem', letterSpacing: '.04em', fontWeight: 600, color: '#fff' }}>ALON</span>
+              <span style={{ fontSize: '.58rem', letterSpacing: '.3em', color: '#9CD2F5', fontWeight: 700, textTransform: 'uppercase' }}>RESORT</span>
+            </span>
+          </Link>
+
+          <nav className={`nav-links ${open ? 'open' : ''}`}>
+            {links.map(([to, label]) => (
+              <NavLink key={to} to={to} className={({ isActive }) => isActive ? 'active' : ''}
+                onClick={() => setOpen(false)}>{label}</NavLink>
+            ))}
+          </nav>
+
+          <div className="nav-right" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            {session && (
+              <div style={{ position: 'relative' }}>
+                <button className="bell" aria-label="Notifications" onClick={() => setMenu((m) => !m)}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0" />
+                  </svg>
+                  {notes.length > 0 && <span className="bell-badge">{notes.length}</span>}
+                </button>
+                {menu && (
+                  <div className="bell-panel">
+                    {notes.length === 0 && <div className="bell-item">No SMS pings yet.</div>}
+                    {notes.slice(0, 6).map((n) => (
+                      <div className="bell-item" key={n.id}>
+                        <span className={`pill ${n.status}`}>{n.status}</span>{' '}
+                        {fmtTime(n.created_at)} — {n.body.slice(0, 64)}…
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {session ? (
+              <>
+                <span className="nav-user">Hi, <b>{profile?.full_name?.split(' ')[0] || 'Guest'}</b></span>
+                <button
+                  className="btn btn-sm"
+                  style={{ color: '#fff', background: 'rgba(255,255,255,.12)', border: '1px solid rgba(255,255,255,.3)' }}
+                  onClick={signOut}
+                >
+                  Sign out
+                </button>
+              </>
+            ) : (
+              <button
+                className="btn btn-sm"
+                style={{ color: '#fff', background: 'rgba(255,255,255,.12)', border: '1px solid rgba(255,255,255,.3)' }}
+                onClick={() => setAuthOpen(true)}
+              >
+                Sign in
+              </button>
+            )}
+
+            <Link to="/" className="btn btn-sky btn-sm">Book stay</Link>
+            <button className="burger" aria-label="Menu" onClick={() => setOpen((o) => !o)}>☰</button>
+          </div>
+        </div>
+      </header>
+    </>
+  );
+}

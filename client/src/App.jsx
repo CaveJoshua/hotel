@@ -1,0 +1,87 @@
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext.jsx';
+import Navbar from './components/Navbar.jsx';
+import Footer from './components/Footer.jsx';
+import Chatbot from './components/Chatbot.jsx';
+import AuthModal from './components/AuthModal.jsx';
+import Toasts from './components/Toasts.jsx';
+import TelemetryTracker from './components/TelemetryTracker.jsx';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
+import Home from './pages/Home.jsx';
+import Rooms from './pages/Rooms.jsx';
+import MyBookings from './pages/MyBookings.jsx';
+import Admin from './pages/Admin.jsx';
+import Accounting from './pages/Accounting.jsx';
+import Receptionist from './pages/Receptionist.jsx';
+import ResortDepartment from './pages/ResortDepartment.jsx';
+import ResortCustomer from './pages/ResortCustomer.jsx';
+
+function MainAppShell() {
+  const location = useLocation();
+  const isStaffRoute = ['/administrator', '/receptionist', '/accounting', '/resort-department'].includes(location.pathname);
+
+  return (
+    <div className="app-shell">
+      <TelemetryTracker />
+
+      {/* Render Public Guest Navbar & Footer ONLY on Guest Routes */}
+      {!isStaffRoute && <Navbar />}
+
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/rooms" element={<Rooms />} />
+
+          <Route path="/my-bookings" element={
+            <ProtectedRoute allowedRoles={['customer', 'administrator', 'receptionist', 'accounting', 'staff']} portalTitle="My Bookings">
+              <MyBookings />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/resort-customer" element={
+            <ProtectedRoute allowedRoles={['customer', 'administrator', 'receptionist', 'accounting', 'staff']} portalTitle="Guest Experience Hub">
+              <ResortCustomer />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/resort-department" element={
+            <ProtectedRoute allowedRoles={['staff', 'receptionist', 'accounting', 'administrator']} portalTitle="Operations & Department Hub">
+              <ResortDepartment />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/administrator" element={
+            <ProtectedRoute allowedRoles={['administrator']} portalTitle="Administrator Control Center">
+              <Admin />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/accounting" element={
+            <ProtectedRoute allowedRoles={['accounting', 'administrator']} portalTitle="Accounting Audit & Ledger">
+              <Accounting />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/receptionist" element={
+            <ProtectedRoute allowedRoles={['receptionist', 'administrator']} portalTitle="Receptionist Desk">
+              <Receptionist />
+            </ProtectedRoute>
+          } />
+        </Routes>
+      </main>
+
+      {!isStaffRoute && <Footer />}
+      {!isStaffRoute && <Chatbot />}
+      <AuthModal />
+      <Toasts />
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <MainAppShell />
+    </AuthProvider>
+  );
+}
