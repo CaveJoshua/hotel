@@ -183,12 +183,11 @@ export default function HomeMenuDashboard({ isOpen, onClose, currentScene = 0, o
           <span style={{ fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: '#94A3B8', fontWeight: 700, display: 'block', marginBottom: 10 }}>
             🚀 MODULE QUICK LAUNCHERS
           </span>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10 }}>
             {[
               ['/rooms', '🏨 Accommodations', 'Suites & Cottages'],
               ['/my-bookings', '📅 My Bookings', 'Digital Keycodes'],
               ['/resort-customer', '🌴 Guest Hub', 'Dining & Excursions'],
-              ['/administrator', '👑 Staff Portal', 'Executive Control'],
             ].map(([path, title, desc]) => (
               <button
                 key={path}

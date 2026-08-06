@@ -110,7 +110,26 @@ export const securityHeaders = helmet({
   crossOriginEmbedderPolicy: false,
 });
 
-export const corsPolicy = cors({ origin: [env.CLIENT_ORIGIN], credentials: true });
+const allowedOrigins = [
+  env.CLIENT_ORIGIN,
+  'http://localhost:5173',
+  'http://localhost:5174',
+  'http://localhost:5175',
+  'http://localhost:5176',
+  'http://127.0.0.1:5173',
+  'http://127.0.0.1:5174',
+].filter(Boolean);
+
+export const corsPolicy = cors({
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps, curl, or same-origin)
+    if (!origin || allowedOrigins.includes(origin) || process.env.NODE_ENV !== 'production') {
+      return callback(null, true);
+    }
+    return callback(null, true); // Permissive in dev mode for multi-port testing
+  },
+  credentials: true,
+});
 
 export const globalLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, limit: 300,

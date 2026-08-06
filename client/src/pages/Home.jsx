@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import BookingFlow from '../components/BookingFlow.jsx';
 import Stars from '../components/Stars.jsx';
@@ -10,17 +10,35 @@ import { toggleOceanSound, isOceanPlaying } from '../lib/oceanSynth.js';
 
 function Counter({ to, decimals = 0, suffix = '' }) {
   const [v, setV] = useState(0);
+  const [started, setStarted] = useState(false);
+  const ref = useRef(null);
+
   useEffect(() => {
-    let raf; const t0 = performance.now(), dur = 1600;
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting && !started) { setStarted(true); obs.disconnect(); } },
+      { threshold: 0.3 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [started]);
+
+  useEffect(() => {
+    if (!started) return;
+    let raf;
+    const t0 = performance.now(), dur = 1800;
     const step = (t) => {
-      const p = Math.min(1, (t - t0) / dur), ease = 1 - Math.pow(1 - p, 3);
+      const p = Math.min(1, (t - t0) / dur);
+      const ease = 1 - Math.pow(1 - p, 4);
       setV(to * ease);
       if (p < 1) raf = requestAnimationFrame(step);
     };
     raf = requestAnimationFrame(step);
     return () => cancelAnimationFrame(raf);
-  }, [to]);
-  return <>{v.toLocaleString(undefined, { maximumFractionDigits: decimals, minimumFractionDigits: decimals })}{suffix}</>;
+  }, [started, to]);
+
+  return <span ref={ref}>{v.toLocaleString(undefined, { maximumFractionDigits: decimals, minimumFractionDigits: decimals })}{suffix}</span>;
 }
 
 const DEFAULT_ROOMS = [

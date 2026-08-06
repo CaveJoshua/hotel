@@ -18,7 +18,9 @@ import ResortCustomer from './pages/ResortCustomer.jsx';
 
 function MainAppShell() {
   const location = useLocation();
-  const isStaffRoute = ['/administrator', '/receptionist', '/accounting', '/resort-department'].includes(location.pathname);
+  const isStaffRoute = ['/administrator', '/admin', '/receptionist', '/accounting', '/resort-department'].some((p) =>
+    location.pathname.toLowerCase().startsWith(p)
+  );
 
   return (
     <div className="app-shell">

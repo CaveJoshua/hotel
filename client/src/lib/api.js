@@ -9,7 +9,7 @@ const FALLBACK_ROOMS = [
   { id: '5', name: 'Backpacker Bunk Suite', slug: 'backpacker-bunk', category: 'Dorm', description: 'Cozy air-conditioned shared bunk suite steps away from Tambak beach front.', capacity: 1, units: 12, rate_php: 750, rating_avg: 4.7, rating_count: 65, amenities: ['AC', 'Lockers', 'Shared Bath', 'WiFi'] },
 ];
 
-const FALLBACK_ANALYTICS = {
+export const FALLBACK_ANALYTICS = {
   overview: {
     arrivals_today: 4,
     departures_today: 3,

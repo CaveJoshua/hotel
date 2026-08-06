@@ -7,6 +7,7 @@ export const IMG = {
   bunk: '/img/bunk.jpg',
   island: '/img/island.jpg',
 };
+
 const BY_SLUG = {
   'nipa-cove': IMG.cottage,
   'garden-breeze': IMG.garden,
@@ -15,4 +16,14 @@ const BY_SLUG = {
   'duyan-villa': IMG.villa,
   'backpacker-bunk': IMG.bunk,
 };
+
 export const roomImg = (slug) => BY_SLUG[slug] || IMG.hero;
+
+export const roomGallery = (slug) => {
+  const primary = roomImg(slug);
+  return [
+    primary,
+    'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80',
+    'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80',
+  ];
+};

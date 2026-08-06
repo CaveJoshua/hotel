@@ -178,23 +178,29 @@ export default function AuthModal() {
         <div className="modal-body">
           {/* GOOGLE AUTO LOGIN BUTTON */}
           <button
+            className="google-btn"
             type="button"
-            className="btn btn-ghost"
             style={{
               width: '100%',
+              display: 'flex',
+              alignItems: 'center',
               justifyContent: 'center',
-              gap: 10,
+              gap: 12,
               marginBottom: 16,
-              border: '1.5px solid var(--line)',
-              background: '#fff',
-              color: 'var(--ink)',
-              fontWeight: 600,
-              padding: '11px 18px',
-              borderRadius: 10,
+              border: '1px solid #CBD5E1',
+              background: '#FFFFFF',
+              color: '#0F172A',
+              fontWeight: 700,
+              fontSize: '.9rem',
+              padding: '12px 18px',
+              borderRadius: 12,
+              cursor: 'pointer',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
+              transition: 'all 0.2s ease',
             }}
             onClick={handleGoogleLogin}
           >
-            <svg width="18" height="18" viewBox="0 0 24 24">
+            <svg width="20" height="20" viewBox="0 0 24 24">
               <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z" />
               <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.27v3.15C3.25 21.3 7.31 24 12 24z" />
               <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.27C.46 8.2.005 10.04.005 12s.455 3.8 1.265 5.42l4.01-3.15z" />

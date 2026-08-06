@@ -59,7 +59,7 @@ export default function Navbar() {
           </nav>
 
           <div className="nav-right" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            {session && (
+            {session && !['administrator', 'receptionist', 'accounting', 'staff'].includes(profile?.role) && (
               <div style={{ position: 'relative' }}>
                 <button className="bell" aria-label="Notifications" onClick={() => setMenu((m) => !m)}>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
