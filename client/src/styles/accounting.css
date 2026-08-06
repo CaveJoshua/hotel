@@ -1,0 +1,19 @@
+/* ==========================================================================
+   ISOLATED ACCOUNTING AUDIT & LEDGER STYLESHEET (accounting.css)
+   Scoped strictly under .accounting-page for clean isolation.
+   ========================================================================== */
+
+.accounting-page .ledger-panel {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.accounting-page .revenue-card {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(56, 189, 248, 0.15));
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 14px;
+  padding: 18px;
+}

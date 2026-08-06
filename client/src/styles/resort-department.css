@@ -1,0 +1,25 @@
+/* ==========================================================================
+   ISOLATED OPERATIONS & DEPARTMENT HUB STYLESHEET (resort-department.css)
+   Scoped strictly under .resort-department-page for clean isolation.
+   ========================================================================== */
+
+.resort-department-page .dept-card {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 20px;
+  transition: transform 0.2s ease;
+}
+
+.resort-department-page .dept-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(56, 189, 248, 0.3);
+}
+
+.resort-department-page .task-pill {
+  font-size: 0.72rem;
+  font-weight: 700;
+  border-radius: 99px;
+  padding: 4px 10px;
+}

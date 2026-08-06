@@ -1,0 +1,19 @@
+/* ==========================================================================
+   ISOLATED RECEPTIONIST DESK STYLESHEET (receptionist.css)
+   Scoped strictly under .receptionist-page for clean isolation.
+   ========================================================================== */
+
+.receptionist-page .desk-panel {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.receptionist-page .check-btn {
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.82rem;
+}

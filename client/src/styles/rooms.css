@@ -1,0 +1,36 @@
+/* ==========================================================================
+   ISOLATED ACCOMMODATIONS & ROOMS PAGE STYLESHEET (rooms.css)
+   Scoped strictly under .rooms-page for clean isolation.
+   ========================================================================== */
+
+.rooms-page .rooms-hero {
+  position: relative;
+  padding: 60px 0 40px;
+  background: linear-gradient(180deg, rgba(7, 13, 27, 0.9) 0%, rgba(15, 23, 42, 0.8) 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.rooms-page .room-card {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.rooms-page .room-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(14, 165, 233, 0.15);
+  border-color: rgba(56, 189, 248, 0.3);
+}
+
+.rooms-page .room-thumb {
+  height: 220px;
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.rooms-page .room-card:hover .room-thumb {
+  transform: scale(1.04);
+}

@@ -1,0 +1,31 @@
+/* ==========================================================================
+   ISOLATED GUEST EXPERIENCE HUB STYLESHEET (resort-customer.css)
+   Scoped strictly under .resort-customer-page for clean isolation.
+   ========================================================================== */
+
+.resort-customer-page .hub-card {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  padding: 24px;
+}
+
+.resort-customer-page .pass-header {
+  background: linear-gradient(135deg, #0EA5E9, #2563EB);
+  border-radius: 16px;
+  padding: 20px;
+  color: #FFFFFF;
+}
+
+.resort-customer-page .service-item {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 16px;
+  transition: all 0.2s ease;
+}
+
+.resort-customer-page .service-item:hover {
+  border-color: rgba(56, 189, 248, 0.4);
+  transform: translateY(-2px);
+}

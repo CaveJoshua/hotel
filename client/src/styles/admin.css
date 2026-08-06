@@ -1,0 +1,240 @@
+/* ==========================================================================
+   ISOLATED ADMINISTRATOR CONTROL CENTER STYLESHEET (admin.css)
+   Scoped strictly under .admin-portal to prevent styling bleeding onto public guest pages.
+   ========================================================================== */
+
+/* 1. CORPORATE EXECUTIVE TYPOGRAPHY */
+.admin-portal,
+.admin-portal h1,
+.admin-portal h2,
+.admin-portal h3,
+.admin-portal h4,
+.admin-portal h5,
+.admin-portal h6,
+.admin-portal button,
+.admin-portal input,
+.admin-portal select,
+.admin-portal table,
+.admin-portal label,
+.admin-portal span {
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+.admin-portal h1,
+.admin-portal h2,
+.admin-portal h3,
+.admin-portal h4,
+.admin-portal .corp-title {
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.028em !important;
+}
+
+.admin-portal .serif {
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.025em !important;
+  font-style: normal !important;
+}
+
+/* 2. EXECUTIVE SIDEBAR & NAVIGATION */
+.admin-portal .sidebar-nav-item {
+  transition: all 0.2s ease !important;
+}
+
+.admin-portal .sidebar-nav-item.active {
+  background: linear-gradient(135deg, #4338CA, #6366F1) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 14px rgba(67, 56, 202, 0.35) !important;
+  border-color: #4338CA !important;
+}
+
+.admin-portal .sidebar-nav-item.active span {
+  color: #FFFFFF !important;
+}
+
+.admin-portal .sidebar-nav-item:not(.active):hover {
+  transform: translateX(4px);
+  background: rgba(99, 102, 241, 0.12) !important;
+}
+
+/* 3. CARDS, PANELS & GLASSMORPHISM */
+.admin-portal .panel-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  backdrop-filter: blur(16px);
+}
+
+.admin-portal .panel-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(56, 189, 248, 0.4) !important;
+  box-shadow: 0 14px 36px -10px rgba(14, 165, 233, 0.15) !important;
+}
+
+.admin-portal .kpi-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-portal .kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #0EA5E9, #38BDF8, #10B981);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.admin-portal .kpi-card:hover::before {
+  opacity: 1;
+}
+
+/* 4. LIGHT MODE & DARK MODE ISOLATED THEME OVERRIDES */
+.admin-portal.light-mode .stat-card,
+.admin-portal.light-mode .panel-card,
+.admin-portal.light-mode .panel {
+  background: #FFFFFF !important;
+  color: #0F172A !important;
+  border-color: #E2E8F0 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
+}
+
+.admin-portal.light-mode h1,
+.admin-portal.light-mode h2,
+.admin-portal.light-mode h3,
+.admin-portal.light-mode h4,
+.admin-portal.light-mode h5,
+.admin-portal.light-mode h6 {
+  color: #0F172A !important;
+}
+
+.admin-portal.light-mode input:not([type="checkbox"]):not([type="radio"]),
+.admin-portal.light-mode select,
+.admin-portal.light-mode textarea {
+  background: #FFFFFF !important;
+  color: #0F172A !important;
+  border-color: #CBD5E1 !important;
+  caret-color: #0F172A !important;
+}
+
+.admin-portal.light-mode input::placeholder {
+  color: #94A3B8 !important;
+}
+
+.admin-portal.light-mode .hbar {
+  background: #E2E8F0 !important;
+}
+
+/* 5. DATA TABLES & EXECUTIVE GRID */
+.admin-portal .table-wrap {
+  overflow: auto;
+}
+
+.admin-portal.light-mode .table-wrap {
+  background: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.admin-portal.light-mode table.table th {
+  background: #F1F5F9 !important;
+  color: #475569 !important;
+  border-bottom-color: #CBD5E1 !important;
+}
+
+.admin-portal.light-mode table.table td,
+.admin-portal.light-mode table.table tr,
+.admin-portal.light-mode table.table tbody {
+  background: #FFFFFF !important;
+  border-bottom-color: #F1F5F9 !important;
+  color: #0F172A !important;
+}
+
+.admin-portal.light-mode table.table td b {
+  color: #0F172A !important;
+}
+
+.admin-portal.light-mode table.table tr:hover td {
+  background: #F8FAFC !important;
+}
+
+.admin-portal .exec-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.admin-portal .exec-table th {
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  padding: 12px 16px !important;
+}
+
+.admin-portal .exec-table td {
+  padding: 14px 16px !important;
+  font-size: 0.88rem !important;
+}
+
+.admin-portal .exec-table tr:hover td {
+  background: rgba(56, 189, 248, 0.04) !important;
+}
+
+/* 6. VIBRANT GREEN STATUS FLAGGING & BADGES */
+.admin-portal .pill.delivered,
+.admin-portal .pill.sent,
+.admin-portal .pill.confirmed,
+.admin-portal .pill.active,
+.admin-portal .pill.paid,
+.admin-portal .pill.completed,
+.admin-portal .pill.success,
+.admin-portal .pill.online,
+.admin-portal .pill.verified,
+.admin-portal .pill.popular,
+.admin-portal .pill.trending {
+  background: rgba(16, 185, 129, 0.18) !important;
+  color: #10B981 !important;
+  border: 1px solid rgba(16, 185, 129, 0.35) !important;
+}
+
+.admin-portal.light-mode .pill.delivered,
+.admin-portal.light-mode .pill.sent,
+.admin-portal.light-mode .pill.confirmed,
+.admin-portal.light-mode .pill.active,
+.admin-portal.light-mode .pill.paid,
+.admin-portal.light-mode .pill.completed,
+.admin-portal.light-mode .pill.success,
+.admin-portal.light-mode .pill.online,
+.admin-portal.light-mode .pill.verified,
+.admin-portal.light-mode .pill.popular,
+.admin-portal.light-mode .pill.trending {
+  background: #ECFDF5 !important;
+  color: #047857 !important;
+  border: 1px solid #A7F3D0 !important;
+  font-weight: 800 !important;
+}
+
+/* 7. RESPONSIVE MOBILE BREAKPOINTS */
+@media (max-width: 1024px) {
+  .admin-portal aside {
+    position: fixed !important;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 999 !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4) !important;
+  }
+  .admin-portal main {
+    width: 100% !important;
+    padding: 16px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .admin-portal main {
+    padding: 12px !important;
+  }
+}
