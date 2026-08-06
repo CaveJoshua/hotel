@@ -604,14 +604,14 @@ export default function Admin() {
               <button
                 key={item.key}
                 onClick={() => setActiveTab(item.key)}
-                className="sidebar-nav-item"
+                className={`sidebar-nav-item ${isActive ? 'active' : ''}`}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   padding: sidebarCollapsed ? '10px' : '10px 14px',
                   borderRadius: 12,
-                  border: isActive ? '1px solid rgba(99, 102, 241, 0.4)' : '1px solid transparent',
+                  border: isActive ? '1px solid #4338CA' : '1px solid transparent',
                   background: isActive ? 'linear-gradient(135deg, #4338CA, #6366F1)' : 'transparent',
                   color: isActive ? '#FFFFFF' : themeMuted,
                   fontWeight: isActive ? 700 : 500,
@@ -626,7 +626,7 @@ export default function Admin() {
                   <span style={{ display: 'flex', alignItems: 'center', color: isActive ? '#FFFFFF' : '#6366F1' }}>
                     {item.icon}
                   </span>
-                  {!sidebarCollapsed && <span>{item.label}</span>}
+                  {!sidebarCollapsed && <span style={{ color: isActive ? '#FFFFFF' : themeText, fontWeight: isActive ? 800 : 600 }}>{item.label}</span>}
                 </div>
 
                 {/* NOTIFICATION BADGE / ACTIVE PILL DOT */}
@@ -1399,25 +1399,25 @@ export default function Admin() {
               </div>
 
               <div className="table-wrap" style={{ background: isLightMode ? '#FFFFFF' : 'rgba(15,23,42,0.85)', border: `1px solid ${themeBorder}` }}>
-                <table className="table" style={{ color: themeText }}>
+                <table className="table" style={{ background: isLightMode ? '#FFFFFF' : undefined, color: themeText }}>
                   <thead>
                     <tr style={{ background: isLightMode ? '#F1F5F9' : 'rgba(30,41,59,0.8)' }}>
-                      <th style={{ color: isLightMode ? '#475569' : themeMuted }}>Dish / Beverage Item</th>
-                      <th style={{ color: isLightMode ? '#475569' : themeMuted }}>Category</th>
-                      <th style={{ color: isLightMode ? '#475569' : themeMuted }}>Orders Sold</th>
-                      <th style={{ color: isLightMode ? '#475569' : themeMuted }}>Total Revenue (₱)</th>
-                      <th style={{ color: isLightMode ? '#475569' : themeMuted }}>Trend Direction</th>
-                      <th style={{ color: isLightMode ? '#475569' : themeMuted }}>Popularity Meter</th>
+                      <th style={{ background: isLightMode ? '#F1F5F9' : undefined, color: isLightMode ? '#475569' : themeMuted }}>Dish / Beverage Item</th>
+                      <th style={{ background: isLightMode ? '#F1F5F9' : undefined, color: isLightMode ? '#475569' : themeMuted }}>Category</th>
+                      <th style={{ background: isLightMode ? '#F1F5F9' : undefined, color: isLightMode ? '#475569' : themeMuted }}>Orders Sold</th>
+                      <th style={{ background: isLightMode ? '#F1F5F9' : undefined, color: isLightMode ? '#475569' : themeMuted }}>Total Revenue (₱)</th>
+                      <th style={{ background: isLightMode ? '#F1F5F9' : undefined, color: isLightMode ? '#475569' : themeMuted }}>Trend Direction</th>
+                      <th style={{ background: isLightMode ? '#F1F5F9' : undefined, color: isLightMode ? '#475569' : themeMuted }}>Popularity Meter</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody style={{ background: isLightMode ? '#FFFFFF' : undefined }}>
                     {food_sales.map((item) => (
-                      <tr key={item.id} style={{ borderBottom: `1px solid ${themeBorder}` }}>
-                        <td><b style={{ color: themeText }}>{item.name}</b></td>
-                        <td><span className="pill" style={{ background: 'rgba(56,189,248,0.15)', color: '#0EA5E9', border: '1px solid rgba(56,189,248,0.3)' }}>{item.category}</span></td>
-                        <td><b style={{ fontSize: '1.05rem', color: '#0EA5E9' }}>{item.orders} orders</b></td>
-                        <td><b style={{ fontSize: '1.05rem', color: '#D97706' }}>{money(item.revenue_php)}</b></td>
-                        <td>
+                      <tr key={item.id} style={{ background: isLightMode ? '#FFFFFF' : undefined, borderBottom: `1px solid ${themeBorder}` }}>
+                        <td style={{ background: isLightMode ? '#FFFFFF' : undefined }}><b style={{ color: themeText }}>{item.name}</b></td>
+                        <td style={{ background: isLightMode ? '#FFFFFF' : undefined }}><span className="pill" style={{ background: 'rgba(56,189,248,0.15)', color: '#0EA5E9', border: '1px solid rgba(56,189,248,0.3)' }}>{item.category}</span></td>
+                        <td style={{ background: isLightMode ? '#FFFFFF' : undefined }}><b style={{ fontSize: '1.05rem', color: '#0EA5E9' }}>{item.orders} orders</b></td>
+                        <td style={{ background: isLightMode ? '#FFFFFF' : undefined }}><b style={{ fontSize: '1.05rem', color: '#D97706' }}>{money(item.revenue_php)}</b></td>
+                        <td style={{ background: isLightMode ? '#FFFFFF' : undefined }}>
                           <span style={{
                             color: item.trend === 'popular' ? '#10B981' : item.trend === 'trending' ? '#F59E0B' : themeMuted,
                             fontWeight: 700,
